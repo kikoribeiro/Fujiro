@@ -2,7 +2,7 @@
 require 'config.php';
 
 function showFavoriteHotels($pdo, $user_id) {
-    
+
     $stmt = $pdo->prepare("SELECT * FROM hotels WHERE hotel_id IN (SELECT hotel_id FROM favorites WHERE user_id = :user_id) ORDER BY is_favorite DESC");
     $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $stmt->execute();
@@ -18,11 +18,11 @@ function showFavoriteHotels($pdo, $user_id) {
         foreach ($favoriteHotels as $hotel) {
             echo '<div class="card mb-4 hotel-card">';
                 echo '<div class="row g-0">';
-        
+
                 echo '<div class="col-md-4">';
-                echo '<img src="/fujiro/fujiro/assets/pexels-pixabay-258154.jpg" alt="' . $hotel['name'] . '" class="img-fluid rounded-start">';
+                echo '<img src="/bd2/assets/pexels-pixabay-258154.jpg" alt="' . $hotel['name'] . '" class="img-fluid rounded-start">';
                 echo '</div>';
-                
+
                 echo '<div class="col-md-8">';
                 echo '<div class="card-body">';
                 echo '<h4 class="card-title">' . $hotel['destination'] . '</h4>';
@@ -40,12 +40,12 @@ function showFavoriteHotels($pdo, $user_id) {
                 echo '<a href="reservationpage.php?hotel_id=' . $hotel['hotel_id'] . '" class="btn btn-primary">Make Reservation</a>';
                 echo '</div>';
                 echo '</div>';
-                
+
                 echo '</div>';
                 echo '</div>';
             }
             echo '</div>';
-        
+
         }
         echo '</ul>';
     }

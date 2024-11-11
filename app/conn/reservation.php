@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'config.php'; 
+require 'config.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -18,13 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         $stmt->execute();
-        header("Location: /fujiro/fujiro/app/home.php");
+        header("Location: /bd2/app/home.php");
         exit();
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
 } else {
-    header("Location: /fujiro/fujiro/app/home.php");
+    header("Location: /bd2/app/home.php");
     exit();
 }
 

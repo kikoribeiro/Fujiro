@@ -15,10 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_reservation'])
         $stmt->execute();
 
 
-        header("Location:/fujiro/fujiro/app/reservations.php");
+        header("Location:/bd2/app/reservations.php");
         exit();
     }
 }
 
-header("Location:/fujiro/fujiro/app/reservations.php");
+header("Location:/bd2/app/reservations.php");
 exit();

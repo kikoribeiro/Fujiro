@@ -16,7 +16,7 @@
 
     try {
         $stmt->execute();
-        header("Location:/fujiro/fujiro/app/home.php");
+        header("Location:/bd2/app/home.php");
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }

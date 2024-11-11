@@ -3,24 +3,24 @@ require 'config.php';
 
 function showHotelsAdmin() {
 
-    global $pdo; 
+    global $pdo;
 
     try {
 
         $stmt = $pdo->query("SELECT * FROM hotels");
         $hotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        
+
     if ($hotels) {
         echo '<div id="hotelContainer" class="container mt-5">';
             foreach ($hotels as $hotel) {
                 echo '<div class="card mb-4 hotel-card">';
                 echo '<div class="row g-0">';
-        
+
                 echo '<div class="col-md-4">';
-                echo '<img src="/fujiro/fujiro/assets/pexels-pixabay-258154.jpg" alt="' . $hotel['name'] . '" class="img-fluid rounded-start">';
+                echo '<img src="/bd2/assets/pexels-pixabay-258154.jpg" alt="' . $hotel['name'] . '" class="img-fluid rounded-start">';
                 echo '</div>';
-                
+
                 echo '<div class="col-md-8">';
                 echo '<div class="card-body">';
                 echo '<h4 class="card-title">' . $hotel['destination'] . '</h4>';
@@ -37,7 +37,7 @@ function showHotelsAdmin() {
                 echo '<a href="/fujiro/fujiro/app/conn/admin_delete_hotel.php?hotel_id=' . $hotel['hotel_id'] . '" class="btn btn-danger">DELETE</a>';
                 echo '</div>';
                 echo '</div>';
-                
+
                 echo '</div>';
                 echo '</div>';
             }
