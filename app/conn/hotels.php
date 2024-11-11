@@ -7,9 +7,12 @@ function showHotels() {
 
     try {
 
-        $stmt = $pdo->query("SELECT * FROM hotels");
+        $stmt = $pdo->prepare("CALL GetAllHotels()");
+        $stmt->execute();
+
         $hotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        $stmt->closeCursor();
 
     if ($hotels) {
         echo '<div id="hotelContainer" class="container mt-5">';
