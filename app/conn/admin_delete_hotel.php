@@ -1,7 +1,5 @@
 <?php
 
-// página a dar erro <-
-
 session_start();
 require 'config.php';
 
@@ -13,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['hotel_id'])) {
         $stmt->bindParam(':hotel_id', $hotel_id, PDO::PARAM_INT);
         $stmt->execute();
 
-        header("Location: /fujiro/fujiro/app/adminhome.php");
+        header("Location: /bd2/app/adminhome.php");
         exit();
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
