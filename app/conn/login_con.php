@@ -7,11 +7,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
     $username = htmlspecialchars($username, ENT_QUOTES, 'UTF-8');
 
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username");
+    $stmt = $pdo->prepare("CALL AuthenticateUser(:username)");
     $stmt->bindParam(':username', $username, PDO::PARAM_STR);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
 
     if ($user && password_verify($password, $user['password_hash'])) {
 
@@ -27,8 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             exit();
         }
     } else {
-
         echo "Invalid username or password";
     }
 }
-

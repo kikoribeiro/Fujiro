@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['hotel_id'])) {
     $hotel_id = $_GET['hotel_id'];
 
-    $stmt = $pdo->prepare("SELECT * FROM hotels WHERE hotel_id = :hotel_id");
+    $stmt = $pdo->prepare("CALL GetHotelDetails(:hotel_id)");
     $stmt->bindParam(':hotel_id', $hotel_id, PDO::PARAM_INT);
     $stmt->execute();
     $hotelDetails = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['hotel_id'])) {
     header("Location: adminhome.php");
     exit();
 }
+
 ?>
 
 <!DOCTYPE html>

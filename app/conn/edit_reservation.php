@@ -8,12 +8,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_reservation'])
     $check_out = isset($_POST['check_out']) ? $_POST['check_out'] : null;
 
     if (is_numeric($reservation_id) && !empty($check_in) && !empty($check_out)) {
-        $stmt = $pdo->prepare("UPDATE reservations SET check_in = :check_in, check_out = :check_out WHERE id = :reservation_id");
+        $stmt = $pdo->prepare("CALL UpdateReservation(:reservation_id, :check_in, :check_out)");
         $stmt->bindParam(':reservation_id', $reservation_id, PDO::PARAM_INT);
         $stmt->bindParam(':check_in', $check_in);
         $stmt->bindParam(':check_out', $check_out);
         $stmt->execute();
-
 
         header("Location:/bd2/app/reservations.php");
         exit();

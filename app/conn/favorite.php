@@ -2,14 +2,10 @@
 require 'config.php';
 
 function showFavoriteHotels($pdo, $user_id) {
-
-    $stmt = $pdo->prepare("SELECT * FROM hotels WHERE hotel_id IN (SELECT hotel_id FROM favorites WHERE user_id = :user_id) ORDER BY is_favorite DESC");
+    $stmt = $pdo->prepare("CALL GetFavoriteHotels(:user_id)");
     $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $stmt->execute();
     $favoriteHotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($favoriteHotels as &$hotel) {
-        $hotel['is_favorite'] = $pdo->query("SELECT is_favorite FROM hotels WHERE hotel_id = " . $hotel['hotel_id'])->fetchColumn();
-    }
 
     if (empty($favoriteHotels)) {
         echo '<p>No favorite hotels found.</p>';
@@ -44,9 +40,7 @@ function showFavoriteHotels($pdo, $user_id) {
                 echo '</div>';
                 echo '</div>';
             }
-            echo '</div>';
-
         }
         echo '</ul>';
-    }
+}
 
