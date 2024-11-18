@@ -76,6 +76,9 @@
                     <a class="nav-link" href="reservations.php"><i class="bi bi-calendar-check"></i>Reservations</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="special_queries.php"><i class="bi bi-filetype-sql"></i>Special Queries</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href=""><i class="bi bi-person"></i><?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'USERNAME'; ?></a>
                 </li>
                 <li>
