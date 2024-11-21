@@ -141,6 +141,7 @@ $stmt->closeCursor();
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             echo "<p class='mt-3'>Discounted Price: <strong>\${$row['DiscountPrice']}</strong></p>";
         }
+        $stmt->closeCursor();
         ?>
     </div>
 
@@ -181,6 +182,7 @@ $stmt->closeCursor();
             }
             echo "</tbody></table>";
         }
+        $stmt->closeCursor();
         ?>
     </div>
 
@@ -210,6 +212,7 @@ $stmt->closeCursor();
                   </tr>";
         }
         echo "</tbody></table>";
+        $stmt->closeCursor();
         ?>
     </div>
 
@@ -221,6 +224,7 @@ $stmt->closeCursor();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             echo "<p>{$row['HotelDetails']}</p>";
         }
+        $stmt->closeCursor();
         ?>
     </div>
 </div>
