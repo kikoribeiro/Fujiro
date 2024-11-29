@@ -2,10 +2,8 @@
 require 'conn/config.php';
 require 'conn/require_login.php';
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $hotel_id = $_POST['hotel_id'];
-
     $destination = $_POST['destination'];
     $name = $_POST['name'];
     $address = $_POST['address'];
@@ -13,25 +11,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $price = $_POST['price'];
     $evaluation = $_POST['evaluation'];
 
-    $stmt = $pdo->prepare("UPDATE hotels SET destination = :destination, name = :name, address = :address, city = :city, price = :price, evaluation = :evaluation WHERE hotel_id = :hotel_id");
+    $stmt = $pdo->prepare("CALL UpdateHotel(:hotel_id, :destination, :name, :address, :city, :price, :evaluation)");
+    $stmt->bindParam(':hotel_id', $hotel_id, PDO::PARAM_INT);
     $stmt->bindParam(':destination', $destination);
     $stmt->bindParam(':name', $name);
     $stmt->bindParam(':address', $address);
     $stmt->bindParam(':city', $city);
     $stmt->bindParam(':price', $price);
     $stmt->bindParam(':evaluation', $evaluation);
-    $stmt->bindParam(':hotel_id', $hotel_id, PDO::PARAM_INT);
     $stmt->execute();
 
     header("Location: adminhome.php");
     exit();
 }
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['hotel_id'])) {
     $hotel_id = $_GET['hotel_id'];
 
-    $stmt = $pdo->prepare("SELECT * FROM hotels WHERE hotel_id = :hotel_id");
+    $stmt = $pdo->prepare("CALL GetHotelDetails(:hotel_id)");
     $stmt->bindParam(':hotel_id', $hotel_id, PDO::PARAM_INT);
     $stmt->execute();
     $hotelDetails = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -41,11 +38,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['hotel_id'])) {
         exit();
     }
 } else {
-
     header("Location: adminhome.php");
     exit();
 }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -126,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['hotel_id'])) {
             <input type="number" name="evaluation" value="<?php echo $hotelDetails['evaluation']; ?>" required><br>
             <button type="submit" name="update_hotel">Update Hotel</button>
         </form>
-          
-    </div>   
+
+    </div>
 </body>
 </html>

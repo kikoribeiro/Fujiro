@@ -8,6 +8,6 @@ $_SESSION = array();
 session_destroy();
 
 
-header("Location: /fujiro/fujiro/app/index.html");
+header("Location: /bd2/app/index.html");
 exit();
 

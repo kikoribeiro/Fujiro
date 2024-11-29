@@ -3,24 +3,27 @@ require 'config.php';
 
 function showHotels() {
 
-    global $pdo; 
+    global $pdo;
 
     try {
 
-        $stmt = $pdo->query("SELECT * FROM hotels");
+        $stmt = $pdo->prepare("CALL GetAllHotels()");
+        $stmt->execute();
+
         $hotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        
+        $stmt->closeCursor();
+
     if ($hotels) {
         echo '<div id="hotelContainer" class="container mt-5">';
             foreach ($hotels as $hotel) {
                 echo '<div class="card mb-4 hotel-card">';
                 echo '<div class="row g-0">';
-        
+
                 echo '<div class="col-md-4">';
-                echo '<img src="/fujiro/fujiro/assets/pexels-pixabay-258154.jpg" alt="' . $hotel['name'] . '" class="img-fluid rounded-start">';
+                echo '<img src="/bd2/assets/pexels-pixabay-258154.jpg" alt="' . $hotel['name'] . '" class="img-fluid rounded-start">';
                 echo '</div>';
-                
+
                 echo '<div class="col-md-8">';
                 echo '<div class="card-body">';
                 echo '<h4 class="card-title">' . $hotel['destination'] . '</h4>';
@@ -37,7 +40,7 @@ function showHotels() {
                 echo '<a href="reservationpage.php?hotel_id=' . $hotel['hotel_id'] . '" class="btn btn-primary">Make Reservation</a>';
                 echo '</div>';
                 echo '</div>';
-                
+
                 echo '</div>';
                 echo '</div>';
             }

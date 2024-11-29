@@ -90,14 +90,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['reservation_id'])) {
                     <input type="date" name="check_out" value="<?php echo $reservationDetails['check_out']; ?>" required><br>
                     <button type="submit" name="update_reservation">Update Reservation</button>
                 </form>
-          
-    </div>   
+
+    </div>
 </body>
 </html>
 <?php
 exit();
 }
 }
-header("Location:/fujiro/fujiro/app/reservations.php");
+header("Location:/bd2/app/reservations.php");
 exit();
 ?>

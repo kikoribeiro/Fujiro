@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php 
+<?php
     require 'conn/hotelsadmin.php';
     require 'conn/require_login.php';
-    ?>
+?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +14,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;700&display=swap');
+           @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;700&display=swap');
         body {
             font-family: 'Kanit', sans-serif;
             background-color: #353935;
@@ -44,24 +44,24 @@
             color: #f5f5f5;
             background-color: #1c1744;
         }
-    
+
         .navbar-custom{
           background-color: #f5f5f5;
-           
+
         }
-    
+
         i{
           padding-right: 5px;
         }
         .favorite-icon {
-        color: red; 
+        color: red;
         cursor: pointer;
     }
-     </style>
+    </style>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg border-bottom navbar-custom">
-    <div class="container-fluid"> 
+    <div class="container-fluid">
         <a class="navbar-brand" href="adminhome.php">Fu<span style="color: #0056b3;">jiro</span></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -73,6 +73,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="admin_add_hotel.php"><i class="bi bi-house-add"></i>Add Hotel</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="special_queries.php"><i class="bi bi-filetype-sql"></i>Special Queries</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href=""><i class="bi bi-person"></i><?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'USERNAME'; ?></a>
@@ -99,18 +102,18 @@
         </div>
     </form>
 </div>
-  </div>
-  <div>
+
+<div>
   <?php
     showHotelsAdmin();
   ?>
-  </div>
- 
-  <script>
-      function filterHotels() {
+</div>
+
+<script>
+  function filterHotels() {
           var destination = document.getElementById('destination').value.toLowerCase();
           var hotelCards = document.getElementsByClassName('card');
-  
+
           for (var i = 0; i < hotelCards.length; i++) {
               var cardDestination = hotelCards[i].getElementsByClassName('card-title')[0].textContent.toLowerCase();
               if (cardDestination.includes(destination)) {
@@ -121,17 +124,17 @@
           }
       }
       function resetSearch() {
-        document.getElementById('destination').value = ''; 
+        document.getElementById('destination').value = '';
         var hotelCards = document.getElementsByClassName('hotel-card');
 
         for (var i = 0; i < hotelCards.length; i++) {
-            hotelCards[i].style.display = 'block'; 
+            hotelCards[i].style.display = 'block';
         }
     }
-    
-  </script>
-</body>
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.21.0/font/bootstrap-icons.css"></script>
+</body>
 </html>

@@ -3,7 +3,7 @@ session_start();
 require 'conn/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-   
+
     $destination = $_POST['destination'];
     $name = $_POST['name'];
     $address = $_POST['address'];
@@ -11,8 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $price = $_POST['price'];
     $evaluation = $_POST['evaluation'];
 
-   
-    $stmt = $pdo->prepare("INSERT INTO hotels (destination, name, address, city, price, evaluation) VALUES (:destination, :name, :address, :city, :price, :evaluation)");
+    // Call the stored procedure
+    $stmt = $pdo->prepare("CALL AddHotel(:destination, :name, :address, :city, :price, :evaluation)");
     $stmt->bindParam(':destination', $destination);
     $stmt->bindParam(':name', $name);
     $stmt->bindParam(':address', $address);
@@ -21,11 +21,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bindParam(':evaluation', $evaluation);
     $stmt->execute();
 
-    
+    // Redirect after insertion
     header("Location: adminhome.php");
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -106,8 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit" name="add_hotel">Add Hotel</button>
         </form>
         <p style="text-align: center; margin-top: 20px;">
-        <i class="bi bi-arrow-left"><a href="javascript:history.back()" style="text-decoration: none;">Go Back</a></i> 
-    </div>   
+        <i class="bi bi-arrow-left"><a href="javascript:history.back()" style="text-decoration: none;">Go Back</a></i>
+    </div>
 </body>
 </html>
-

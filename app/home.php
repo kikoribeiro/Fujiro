@@ -1,6 +1,7 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<?php 
+<?php
     require 'conn/hotels.php';
     require 'conn/require_login.php';
     ?>
@@ -44,35 +45,38 @@
             color: #f5f5f5;
             background-color: #1c1744;
         }
-    
+
         .navbar-custom{
           background-color: #f5f5f5;
-           
+
         }
-    
+
         i{
           padding-right: 5px;
         }
         .favorite-icon {
-        color: red; 
+        color: red;
         cursor: pointer;
     }
      </style>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg border-bottom navbar-custom">
-    <div class="container-fluid"> 
+    <div class="container-fluid">
         <a class="navbar-brand" href="">Fu<span style="color: #0056b3;">jiro</span></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse ml-auto " id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item "> 
+                <li class="nav-item ">
                   <a class="nav-link" href="favoritespage.php"><i class="bi bi-heart"></i>Favorites</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="reservations.php"><i class="bi bi-calendar-check"></i>Reservations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="special_queries.php"><i class="bi bi-filetype-sql"></i>Special Queries</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href=""><i class="bi bi-person"></i><?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'USERNAME'; ?></a>
@@ -105,12 +109,12 @@
     showHotels();
   ?>
   </div>
- 
+
   <script>
       function filterHotels() {
           var destination = document.getElementById('destination').value.toLowerCase();
           var hotelCards = document.getElementsByClassName('card');
-  
+
           for (var i = 0; i < hotelCards.length; i++) {
               var cardDestination = hotelCards[i].getElementsByClassName('card-title')[0].textContent.toLowerCase();
               if (cardDestination.includes(destination)) {
@@ -121,27 +125,27 @@
           }
       }
       function resetSearch() {
-        document.getElementById('destination').value = ''; 
+        document.getElementById('destination').value = '';
         var hotelCards = document.getElementsByClassName('hotel-card');
 
         for (var i = 0; i < hotelCards.length; i++) {
-            hotelCards[i].style.display = 'block'; 
+            hotelCards[i].style.display = 'block';
         }
     }
-    
+
   </script>
   <script>
     $(document).ready(function () {
     $('.favorite-icon').click(function (e) {
         e.preventDefault();
         var hotelId = $(this).data('hotel-id');
-        console.log('Clicked on hotel ID:', hotelId); 
+        console.log('Clicked on hotel ID:', hotelId);
 
         $.get('conn/toggle_favorite.php', { hotel_id: hotelId }, function () {
-            console.log('Toggle favorite success!'); 
+            console.log('Toggle favorite success!');
             location.reload();
         }).fail(function (xhr, status, error) {
-            console.error('Toggle favorite failed:', error); 
+            console.error('Toggle favorite failed:', error);
         });
     });
 });
